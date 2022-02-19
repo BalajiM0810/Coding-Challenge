@@ -3,6 +3,7 @@ using MHP.CodingChallenge.Backend.Dependency.Inquiry;
 using Microsoft.Extensions.DependencyInjection;
 using MHP.CodingChallenge.Backend.Dependency.Notifications;
 using Moq;
+using  MHP.CodingChallenge.Backend.Dependency.Inquiry.Interface;
 
 namespace MHP.CodingChallenge.Backend.Dependency.Test
 {
@@ -18,18 +19,18 @@ namespace MHP.CodingChallenge.Backend.Dependency.Test
             inquiry.Text = "Can I haz cheezburger?";
 
             // room for potential additional test setup
-            var mockEmailHander = new Mock<EmailHandler>();
-            var mockPushNotificationHandler = new Mock<PushNotificationHandler>();
+            var mockEmailHander = new Mock<IEmailHandler>();
+            var mockPushNotificationHandler = new Mock<IPushNotificationHandler>();
 
             var services = new ServiceCollection()
                 .AddLogging()
-                .AddSingleton<InquiryService>()
+                .AddSingleton<IInquiryService, InquiryService>()
                 .AddSingleton(mockEmailHander.Object)
                 .AddSingleton(mockPushNotificationHandler.Object);
 
             var inquiryService = services
                 .BuildServiceProvider()
-                .GetRequiredService<InquiryService>();
+                .GetRequiredService<IInquiryService>();
 
             // when
             inquiryService.Create(inquiry);

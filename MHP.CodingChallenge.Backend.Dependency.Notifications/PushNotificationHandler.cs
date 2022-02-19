@@ -1,10 +1,11 @@
 ﻿using System;
 using MHP.CodingChallenge.Backend.Dependency.Inquiry;
 using Microsoft.Extensions.Logging;
+using MHP.CodingChallenge.Backend.Dependency.Inquiry.Interface;
 
 namespace MHP.CodingChallenge.Backend.Dependency.Notifications
 {
-    public class PushNotificationHandler
+    public class PushNotificationHandler : IPushNotificationHandler
     {
         public virtual void SendNotification(Inquiry.Inquiry inquiry)
         {

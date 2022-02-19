@@ -8,6 +8,7 @@ namespace MHP.CodingChallenge.Backend.Dependency.Test
        public Startup()
         {
 
+
         }
     }
 }

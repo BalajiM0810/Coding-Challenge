@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MHP.CodingChallenge.Backend.Dependency.Inquiry.Interface;
+using MHP.CodingChallenge.Backend.Dependency.Notifications;
 
 namespace MHP.CodingChallenge.Backend.Dependency
 {
@@ -27,7 +29,9 @@ namespace MHP.CodingChallenge.Backend.Dependency
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<InquiryService>();
+            services.AddTransient<IInquiryService, InquiryService>();
+            services.AddTransient<IPushNotificationHandler, PushNotificationHandler>();
+            services.AddTransient<IEmailHandler, EmailHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
